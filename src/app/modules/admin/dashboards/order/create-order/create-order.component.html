@@ -1,0 +1,71 @@
+<div class="flex-auto p-6 sm:p-10">
+    <form class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
+        <p class="text-lg font-medium">Select Customer</p>
+        <p class="text-secondary mb-6">
+            Set your login preferences, help us personalize your experience and make big account changes here
+        </p>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pl-3">
+                <mat-label>Customers</mat-label>
+                <mat-select [placeholder]="'customer'">
+                    @for (customer of customers; track customer) {
+                    <mat-option [value]="customer.id"
+                        (click)="selectCustomerProfile(customer)">{{customer.firstName}}</mat-option>
+                    }
+                    <!-- <mat-option value="language-1">Language 1</mat-option>
+                    <mat-option value="language-2">Language 2</mat-option>
+                    <mat-option value="language-3">Language 3</mat-option> -->
+                </mat-select>
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+            </mat-form-field>
+        </div>
+
+
+        @if (customerProfile != null) {
+        <mat-divider class="mt-6 mb-10"></mat-divider>
+        <p class="text-lg font-medium">Profile</p>
+        <p class="text-secondary mb-6">
+            People here will get to know you with this information
+        </p>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput [placeholder]="'First name'" value={{customerProfile.firstName}} [disabled]="true">
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pl-3">
+                <input matInput [placeholder]="'Last name'" value={{customerProfile.lastName}} [disabled]="true">
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <input matInput [placeholder]="'Username'" value={{customerProfile.email}} [disabled]="true">
+                <!-- <span matPrefix>www.example.com/</span> -->
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <input matInput [placeholder]="'phoneNumber'" value={{customerProfile.phoneNumber}} [disabled]="true">
+                <!-- <span matPrefix>www.example.com/</span> -->
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <textarea matInput [placeholder]="'Address'" [rows]="3"></textarea>
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:bars-3-bottom-left'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <mat-divider class="mt-6 mb-10"></mat-divider>
+
+        }
+        <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
+            <button mat-button>
+                Cancel
+            </button>
+            <button class="px-6 ml-3" mat-flat-button [color]="'primary'" (click)="createOrder(customerProfile)">
+                Create
+            </button>
+        </div>
+
+    </form>
+</div>

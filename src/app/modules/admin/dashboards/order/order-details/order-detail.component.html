@@ -1,0 +1,149 @@
+<div class="lex flex-col w-full min-w-0 sm:absolute sm:inset-0 sm:overflow-hidden">
+    <!-- Display the order information at the top -->
+    <mat-drawer-container class="flex-auto sm:h-full">
+        <!-- Display the order information at the top -->
+        <div class="flex items-center justify-center border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-red-700">
+            <b> order inprocess #125266468</b>
+        </div>
+        <!-- Drawer content -->
+        <!-- Drawer content Desing -->
+        <ng-container
+            *ngFor="let design of designs; let i = index; let first = first; let last = last; trackBy: trackByFn">
+
+
+            <!-- Main -->
+            <div class="flex-auto px-6 pt-9 pb-12 ">
+
+                <!-- Panel header -->
+                <div class="flex items-center">
+
+                    <!-- Drawer toggle -->
+                    <button class="lg:hidden -ml-2" mat-icon-button (click)="drawer.toggle()">
+                        <mat-icon [svgIcon]="'heroicons_outline:bars-3'"></mat-icon>
+                    </button>
+
+                    <!-- Panel title -->
+                    <div class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none">
+                        <div class="row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="max-width: 9%;">
+                                <!-- {{design.filename}} -->
+                                <img src="assets/images/apps/orders/sports1.jpg" class="rounded">
+                            </div>
+                            <div class="flex">
+                                <div class="flex items-center">
+                                    <span style="font-weight: normal; font-size: medium;">
+                                        example of how you can modify the code to ensure the elements are displayed in a
+                                        row
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Actions -->
+                            <div class="flex">
+
+                                <div class="flex items-center">
+                                    @if (design.isApproved == false){
+                                    <button style="background-color: #0FE177; color: white;" mat-raised-button
+                                        (click)="designApproved(i , true)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus'"></mat-icon>
+                                        <span class="ml-2">Approved Design</span>
+                                    </button>
+                                    }
+                                    @else{
+                                    <button style="background-color: #0FE177; color: white;" mat-raised-button>
+                                        <span class="ml-2">Approved Design</span>
+                                    </button>
+                                    }
+                                </div>
+                                @if (design.isApproved == false) {
+                                <div class="flex items-center ml-2">
+                                    <button style="background-color: #ED1C24; color: white;" mat-raised-button
+                                        (click)="designApproved(i , true)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:minus'"></mat-icon>
+                                        <span class="ml-2">Revision</span>
+                                    </button>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load settings panel -->
+                @if(design.isApproved){
+                <div class="flex flex-col mt-12 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+                    <ng-container
+                        *ngFor="let orderitem of design.orderItems; let i = index; let first = first; let last = last; trackBy: trackByFn">
+                        <div class="grid sm:grid-cols-10 gap-6 w-full mt-12">
+                            <!-- Name -->
+                            <div class="sm:col-span-2">
+                                <mat-form-field class="flex-auto" [subscriptSizing]="'dynamic'">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:briefcase'"
+                                        matPrefix></mat-icon>
+                                    <input matInput [(ngModel)]="orderitem.name" [placeholder]="'Name'" required>
+                                    <mat-error>Required field!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Size -->
+                            <div class="sm:col-span-2">
+                                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:building-office-2'"
+                                        matPrefix></mat-icon>
+                                    <input matInput [(ngModel)]="orderitem.size" [placeholder]="'Size'" required>
+                                    <mat-error>Size is required field!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!--Quantity-->
+                            <div class="sm:col-span-2">
+                                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:building-office-2'"
+                                        matPrefix></mat-icon>
+                                    <input [type]="'number'" matInput [(ngModel)]="orderitem.quantity"
+                                        [placeholder]="'Quantity'" required>
+                                    <mat-error>Required only number.!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!--Number-->
+                            <div class="sm:col-span-2">
+                                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:building-office-2'"
+                                        matPrefix></mat-icon>
+                                    <input [type]="'number'" matInput [(ngModel)]="orderitem.number"
+                                        [placeholder]="'Number'" required>
+                                    <mat-error>Required only number.!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Remove items -->
+                            <ng-container class="sm:col-span-2" *ngIf="!(first && last)">
+                                <div class="flex items-center w-10 pl-2" [ngClass]="{'mt-6':1}">
+                                    <button class="w-8 h-8 min-h-8" mat-icon-button
+                                        (click)="removeRow(i, desing.designId)" matTooltip="Remove">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <button type="submit"
+                        class="group inline-flex items-center mt-2 -ml-4 py-2 px-4 rounded cursor-pointer"
+                        (click)="AddRow(i)">
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                        <span class="ml-2 font-medium text-secondary group-hover:underline">Add Item</span>
+                    </button>
+                </div>
+                }
+            </div>
+
+        </ng-container>
+        <!-- Drawer Design -->
+        <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
+            <button mat-button>
+                Cancel
+            </button>
+            <button class="px-6 ml-3" mat-flat-button [color]="'primary'" (click)="updateOrder()">
+                Create
+            </button>
+        </div>
+        <!--Drawer end-->
+    </mat-drawer-container>
+
+</div>

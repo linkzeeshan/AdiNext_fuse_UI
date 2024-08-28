@@ -142,6 +142,81 @@ export const appRoutes: Route[] = [
                                 'app/modules/admin/dashboards/doctor/doctor.routes'
                             ),
                     },
+                    {
+                        path: 'order',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/order/order.routes'
+                            ),
+
+                    },
+                    {
+                        path: 'createorder',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/order/create-order/createorder.routes'
+                            ),
+
+                    },
+                    {
+                        path: 'orderlist',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/order/order-list/order-list.routes'
+                            ),
+
+                    },
+                    {
+                        path: 'orderdetails',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/order/order-details/order-detail.routes'
+                            ),
+
+                    },
+                    {
+                        path: 'vieworder',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/order/view-order/view-order.routes'
+                            ),
+
+                    },
+                    {
+                        path: 'production',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/production/production.routes'
+                            ),
+                    },
+                    {
+                        path: 'qa',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/qa/qa.routes'
+                            ),
+                    },
+                    {
+                        path: 'delivered',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/delivered/delivered.routes'
+                            ),
+                    },
+                    {
+                        path: 'cancelled',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/cancelled/cancelled.routes'
+                            ),
+                    },
+                    {
+                        path: 'shipping',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/dashboards/shipping/shipping.routes'
+                            ),
+                    },
                 ],
             },
 

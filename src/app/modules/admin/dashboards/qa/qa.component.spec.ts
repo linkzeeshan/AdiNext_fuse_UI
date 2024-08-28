@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProductionComponent } from './qa.component';
+
+describe('ProductionComponent', () => {
+  let component: ProductionComponent;
+  let fixture: ComponentFixture<ProductionComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ProductionComponent]
+    })
+      .compileComponents();
+
+    fixture = TestBed.createComponent(ProductionComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
